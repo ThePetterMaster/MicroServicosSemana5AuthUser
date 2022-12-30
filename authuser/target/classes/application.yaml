@@ -1,0 +1,50 @@
+server:
+  port: 8087
+  servlet:
+    context-path: '/ead-authuser/'
+
+spring:
+  application:
+    name: ead-authuser-service
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    password: ''
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      ? ''
+      : hibernate:
+          show_sql: 'true'
+    defer-datasource-initialization: 'true'
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: 'true'
+      path: /h2-console
+  rabbitmq:
+    addresses: amqps://tlgdmkod:KmM9m6KAstFejguJZEvSL4A-2KXgZEQw@moose.rmq.cloudamqp.com/tlgdmkod
+
+logging:
+  level:
+    com.ead: TRACE
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
+
+ead:
+  api:
+    url:
+      course: 'http://ead-course-service/ead-course'
+  broker:
+    exchange:
+      userEvent: ead.userevent
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost
